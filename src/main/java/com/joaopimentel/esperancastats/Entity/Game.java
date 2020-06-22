@@ -1,7 +1,8 @@
 package com.joaopimentel.esperancastats.Entity;
 
 import com.joaopimentel.esperancastats.Entity.enumerators.Result;
-import com.joaopimentel.esperancastats.Entity.statistics.Statistics;
+import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfGame;
+import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,10 +23,12 @@ public class Game {
     private int awayGoals;
     @Enumerated(value = EnumType.STRING)
     private Result result;
+    @Enumerated(value = EnumType.STRING)
+    private TypeOfGame typeOfGame;
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "game")
-    private List<Statistics> listOfStatistics;
+    private List<Statistic> listOfStatistics;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;

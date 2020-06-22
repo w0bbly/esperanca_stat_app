@@ -19,6 +19,6 @@ public class Offside extends StatCommonClass {
     @Enumerated(value = EnumType.STRING)
     private StateOfGame stateOfGame;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "statistics_id", nullable = false)
-    private Statistics statistics;
+    @JoinColumn(name = "statistic_id", nullable = false)
+    private Statistic statistic;
 }

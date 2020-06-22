@@ -1,6 +1,5 @@
 package com.joaopimentel.esperancastats.DTO;
 
-import com.joaopimentel.esperancastats.Entity.Game;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,5 +11,5 @@ import java.util.List;
 @ToString
 public class TeamDTO {
     private String teamName;
-    private List<Game> games;
+    private List<GameDTO> games;
 }

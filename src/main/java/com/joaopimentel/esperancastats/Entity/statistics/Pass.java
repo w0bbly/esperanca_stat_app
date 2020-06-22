@@ -1,7 +1,7 @@
 package com.joaopimentel.esperancastats.Entity.statistics;
 
-import com.joaopimentel.esperancastats.Entity.enumerators.StateOfGame;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfGoal;
+import com.joaopimentel.esperancastats.Entity.enumerators.ActionOutcome;
+import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfPass;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,16 +12,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "goals")
-public class Goals extends StatCommonClass {
+@Table(name = "pass")
+public class Pass extends StatCommonClass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Enumerated(value = EnumType.STRING)
-    private StateOfGame stateOfGame;
+    private TypeOfPass typeOfPass;
     @Enumerated(value = EnumType.STRING)
-    private TypeOfGoal typeOfGoal;
+    private ActionOutcome actionOutcome;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "statistics_id", nullable = false)
-    private Statistics statistics;
+    @JoinColumn(name = "statistic_id", nullable = false)
+    private Statistic statistic;
 }

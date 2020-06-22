@@ -11,14 +11,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "shots")
-public class Shots extends StatCommonClass {
+@Table(name = "shot")
+public class Shot extends StatCommonClass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Enumerated(value = EnumType.STRING)
     private TypeOfShot typeOfShot;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "statistics_id", nullable = false)
-    private Statistics statistics;
+    @JoinColumn(name = "statistic_id", nullable = false)
+    private Statistic statistic;
 }

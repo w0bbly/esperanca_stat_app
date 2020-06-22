@@ -1,7 +1,7 @@
 package com.joaopimentel.esperancastats.Entity.statistics;
 
-import com.joaopimentel.esperancastats.Entity.enumerators.ActionOutcome;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfPass;
+import com.joaopimentel.esperancastats.Entity.enumerators.Decisions;
+import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfCross;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,16 +12,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "passes")
-public class Passes extends StatCommonClass {
+@Table(name = "cross")
+public class Cross extends StatCommonClass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Enumerated(value = EnumType.STRING)
-    private TypeOfPass typeOfPass;
+    private TypeOfCross typeOfCross;
     @Enumerated(value = EnumType.STRING)
-    private ActionOutcome actionOutcome;
+    private Decisions decisions;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "statistics_id", nullable = false)
-    private Statistics statistics;
+    @JoinColumn(name = "statistic_id", nullable = false)
+    private Statistic statistic;
 }
