@@ -33,10 +33,10 @@ public class TeamService {
         return teamMapping.toDto(teamRepository.findAll());
     }
 
-    public TeamDTO createTeam(Team team) {
+    public TeamDTO createTeam(TeamDTO team) {
         //first create the team
-        teamRepository.save(team);
-        return teamMapping.toDto(team);
+        teamRepository.save(teamMapping.toEntity(team));
+        return team;
     }
 
     public TeamDTO editTeam(Long id, TeamDTO team) {

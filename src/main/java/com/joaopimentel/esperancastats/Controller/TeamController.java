@@ -1,7 +1,6 @@
 package com.joaopimentel.esperancastats.Controller;
 
 import com.joaopimentel.esperancastats.DTO.TeamDTO;
-import com.joaopimentel.esperancastats.Entity.Team;
 import com.joaopimentel.esperancastats.Service.TeamService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -35,7 +34,7 @@ public class TeamController {
     }
 
     @PostMapping
-    public ResponseEntity<TeamDTO> createTeam(@RequestBody Team team) {
+    public ResponseEntity<TeamDTO> createTeam(@RequestBody TeamDTO team) {
         return ResponseEntity.ok(teamService.createTeam(team));
     }
 
