@@ -1,12 +1,11 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
-import com.joaopimentel.esperancastats.Entity.statistics.Cross;
+import com.joaopimentel.esperancastats.DTO.statistics.CrossDTO;
 import com.joaopimentel.esperancastats.Service.statistics.CrossService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,32 +19,48 @@ public class CrossController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<Cross>> getAllCrosses() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<CrossDTO>> getAllCrosses() {
+        return ResponseEntity.ok(crossService.getAllCrosses());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Cross> getCrossById(@PathVariable Long id) {
-        return ResponseEntity.ok(new Cross());
+    public ResponseEntity<CrossDTO> getCrossById(@PathVariable Long id) {
+        CrossDTO crossDTO = crossService.getCrossById(id);
+
+        if(crossDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(crossDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<Cross> createCross() {
-        return ResponseEntity.ok(new Cross());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<CrossDTO> createCross(@PathVariable Long statisticId, @RequestBody CrossDTO cross) {
+        return ResponseEntity.ok(crossService.createCross(statisticId, cross));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cross> editCross(@PathVariable Long id) {
-        return ResponseEntity.ok(new Cross());
+    public ResponseEntity<CrossDTO> editBallPossession(@PathVariable Long id, @RequestBody CrossDTO cross) {
+        CrossDTO crossDTO = crossService.editCross(id, cross);
+
+        if(crossDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(crossDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteCrossById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = crossService.deleteCrossById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<String> deleteAllCrosses() {
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(crossService.deleteAllCrosses());
     }
 }

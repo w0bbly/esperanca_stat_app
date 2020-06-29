@@ -10,10 +10,10 @@ import java.util.List;
 @Setter
 @ToString
 public class StatisticsDTO {
-    private List<CrossesDTO> crosses;
+    private List<CrossDTO> crosses;
     private BallPossessionDTO ballPossession;
     private List<DeadBallDTO> deadBalls;
-    private List<GoalsDTO> goals;
+    private List<GoalDTO> goals;
     private List<OffsideDTO> offsides;
     private List<PassesDTO> passes;
     private List<PossessionLostDTO> possessionLosses;

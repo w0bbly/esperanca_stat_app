@@ -17,7 +17,7 @@ public class BallPossession extends StatCommonClass {
     private Long id;
     private String timeOfPossessionHome;
     private String timeOfPossessionAway;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "statistic_id", nullable = false)
     private Statistic statistic;
 }

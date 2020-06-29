@@ -55,7 +55,13 @@ public class Statistic {
             fetch = FetchType.LAZY,
             mappedBy = "statistic")
     private List<Transition> transitions;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id", nullable = false)
     private Game game;
+
+    public void addCross(Cross cross) {
+        this.crosses.add(cross);
+    }
+    public void addGoal(Goal goal) { this.goals.add(goal); }
+    public void addDeadBall(DeadBall deadBall) { this.deadBalls.add(deadBall); }
 }

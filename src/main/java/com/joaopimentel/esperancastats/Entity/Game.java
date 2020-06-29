@@ -6,7 +6,6 @@ import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -25,10 +24,8 @@ public class Game {
     private Result result;
     @Enumerated(value = EnumType.STRING)
     private TypeOfGame typeOfGame;
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "game")
-    private List<Statistic> listOfStatistics;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Statistic statistic;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;

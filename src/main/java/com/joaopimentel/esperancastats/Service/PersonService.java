@@ -22,7 +22,6 @@ public class PersonService {
 
     public PersonDTO getPersonById(Long id) {
         Optional<Person> person = personRepository.findById(id);
-
         return person.map(personMapping::toDto).orElse(null);
     }
 
@@ -31,18 +30,26 @@ public class PersonService {
     }
 
     public PersonDTO createPerson(PersonDTO personDTO) {
-        personRepository.save(personMapping.toEntity(personDTO));
+        Person person = new Person();
+
+        person.setUsername(personDTO.getUsername());
+        person.setPassword(personDTO.getPassword());
+
+        personRepository.save(person);
+
         return personDTO;
     }
 
-    public PersonDTO editPerson(Long id, PersonDTO person) {
-        Optional<Person> p = personRepository.findById(id);
+    public PersonDTO editPerson(Long id, PersonDTO personDTO) {
+        Optional<Person> person = personRepository.findById(id);
 
-        if(p.isPresent()) {
-            p.get().setUsername(personMapping.toEntity(person).getUsername());
-            p.get().setPassword(personMapping.toEntity(person).getPassword());
-            personRepository.save(p.get());
-            return personMapping.toDto(p.get());
+        if(person.isPresent()) {
+
+            person.get().setUsername(personDTO.getUsername());
+            person.get().setPassword(personDTO.getPassword());
+            personRepository.save(person.get());
+
+            return personMapping.toDto(person.get());
         }
 
         return null;

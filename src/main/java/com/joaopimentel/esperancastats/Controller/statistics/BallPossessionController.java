@@ -1,12 +1,11 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
-import com.joaopimentel.esperancastats.Entity.statistics.BallPossession;
+import com.joaopimentel.esperancastats.DTO.statistics.BallPossessionDTO;
 import com.joaopimentel.esperancastats.Service.statistics.BallPossessionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,32 +19,48 @@ public class BallPossessionController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<BallPossession>> getAllBallPossessions() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<BallPossessionDTO>> getAllBallPossessions() {
+        return ResponseEntity.ok(ballPossessionService.getAllBallPossessions());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<BallPossession> getBallPossessionById(@PathVariable Long id) {
-        return ResponseEntity.ok(new BallPossession());
+    public ResponseEntity<BallPossessionDTO> getBallPossessionById(@PathVariable Long id) {
+        BallPossessionDTO ballPossessionDTO = ballPossessionService.getBallPossessionById(id);
+
+        if(ballPossessionDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(ballPossessionDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<BallPossession> createBallPossession() {
-        return ResponseEntity.ok(new BallPossession());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<BallPossessionDTO> createBallPossession(@PathVariable Long statisticId, @RequestBody BallPossessionDTO ballPossession) {
+        return ResponseEntity.ok(ballPossessionService.createBallPossession(statisticId, ballPossession));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BallPossession> editBallPossession(@PathVariable Long id) {
-        return ResponseEntity.ok(new BallPossession());
+    public ResponseEntity<BallPossessionDTO> editBallPossession(@PathVariable Long id, @RequestBody BallPossessionDTO ballPossession) {
+        BallPossessionDTO ballPossessionDTO = ballPossessionService.editBallPossession(id, ballPossession);
+
+        if(ballPossessionDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(ballPossessionDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteBallPossessionById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = ballPossessionService.deleteBallPossessionById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<String> deleteAllBallPossessions() {
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(ballPossessionService.deleteAllBallPossessions());
     }
 }
