@@ -1,6 +1,8 @@
 package com.joaopimentel.esperancastats.Entity.statistics;
 
 import com.joaopimentel.esperancastats.Entity.enumerators.ActionOutcome;
+import com.joaopimentel.esperancastats.Entity.enumerators.FieldCorridors;
+import com.joaopimentel.esperancastats.Entity.enumerators.FieldThirds;
 import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfPass;
 import lombok.*;
 
@@ -13,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "pass")
-public class Pass extends StatCommonClass {
+public class Pass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -24,4 +26,9 @@ public class Pass extends StatCommonClass {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "statistic_id", nullable = false)
     private Statistic statistic;
+    @Enumerated(value = EnumType.STRING)
+    private FieldThirds fieldThirds;
+    @Enumerated(value = EnumType.STRING)
+    private FieldCorridors fieldCorridors;
+    private String timeStat;
 }

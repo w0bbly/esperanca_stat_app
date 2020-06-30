@@ -1,6 +1,6 @@
 package com.joaopimentel.esperancastats.DTO;
 
-import com.joaopimentel.esperancastats.DTO.statistics.StatisticsDTO;
+import com.joaopimentel.esperancastats.DTO.statistics.StatisticDTO;
 import com.joaopimentel.esperancastats.Entity.enumerators.Result;
 import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfGame;
 import lombok.Getter;
@@ -15,5 +15,5 @@ public class GameDTO {
     private int awayGoals;
     private Result result;
     private TypeOfGame typeOfGame;
-    private StatisticsDTO statistic;
+    private StatisticDTO statistic;
 }

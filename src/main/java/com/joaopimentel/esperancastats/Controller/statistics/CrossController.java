@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping(path = "/crosses")
+@RequestMapping(path = "/cross")
 public class CrossController {
 
     private final CrossService crossService;

@@ -1,7 +1,8 @@
 package com.joaopimentel.esperancastats.DTO.statistics;
 
+import com.joaopimentel.esperancastats.Entity.enumerators.FieldCorridors;
+import com.joaopimentel.esperancastats.Entity.enumerators.FieldThirds;
 import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfOutcome;
-import com.joaopimentel.esperancastats.Entity.statistics.StatCommonClass;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +10,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class PossessionRecoveryDTO extends StatCommonClass {
+public class PossessionRecoveryDTO {
     private TypeOfOutcome typeOfOutcome;
+    private FieldThirds fieldThirds;
+    private FieldCorridors fieldCorridors;
+    private String timeStat;
 }

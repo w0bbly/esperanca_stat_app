@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "ball_possession")
-public class BallPossession extends StatCommonClass {
+public class BallPossession {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

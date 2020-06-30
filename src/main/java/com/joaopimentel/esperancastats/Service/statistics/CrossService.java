@@ -49,7 +49,6 @@ public class CrossService {
             statistic.get().addCross(cross);
 
             statisticsRepository.save(statistic.get());
-            crossRepository.save(cross);
             return dto;
         }
 

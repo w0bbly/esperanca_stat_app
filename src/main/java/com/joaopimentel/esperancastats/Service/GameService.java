@@ -7,7 +7,7 @@ import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import com.joaopimentel.esperancastats.Repository.GameMapping;
 import com.joaopimentel.esperancastats.Repository.GameRepository;
 import com.joaopimentel.esperancastats.Repository.TeamRepository;
-import com.joaopimentel.esperancastats.Repository.statistics.StatisticsMapping;
+import com.joaopimentel.esperancastats.Repository.statistics.StatisticMapping;
 import com.joaopimentel.esperancastats.Repository.statistics.StatisticsRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +21,14 @@ public class GameService {
     private final GameRepository gameRepository;
     private final GameMapping gameMapping;
     private final TeamRepository teamRepository;
-    private final StatisticsMapping statisticsMapping;
+    private final StatisticMapping statisticMapping;
     private final StatisticsRepository statisticsRepository;
 
-    public GameService(GameRepository gameRepository, GameMapping gameMapping, TeamRepository teamRepository, StatisticsMapping statisticsMapping, StatisticsRepository statisticsRepository) {
+    public GameService(GameRepository gameRepository, GameMapping gameMapping, TeamRepository teamRepository, StatisticMapping statisticMapping, StatisticsRepository statisticsRepository) {
         this.gameRepository = gameRepository;
         this.gameMapping = gameMapping;
         this.teamRepository = teamRepository;
-        this.statisticsMapping = statisticsMapping;
+        this.statisticMapping = statisticMapping;
         this.statisticsRepository = statisticsRepository;
     }
 
@@ -80,7 +80,7 @@ public class GameService {
         if(g.isPresent()) {
             g.get().setAwayGoals(game.getAwayGoals());
             g.get().setHomeGoals(game.getHomeGoals());
-            g.get().setStatistic(statisticsMapping.toEntity(game.getStatistic()));
+            g.get().setStatistic(statisticMapping.toEntity(game.getStatistic()));
             g.get().setResult(game.getResult());
             g.get().setTypeOfGame(game.getTypeOfGame());
 

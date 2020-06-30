@@ -1,8 +1,6 @@
 package com.joaopimentel.esperancastats.DTO.statistics;
 
-import com.joaopimentel.esperancastats.Entity.enumerators.Decisions;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfCross;
-import com.joaopimentel.esperancastats.Entity.statistics.StatCommonClass;
+import com.joaopimentel.esperancastats.Entity.enumerators.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,7 +8,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CrossDTO extends StatCommonClass {
+public class CrossDTO {
     private TypeOfCross typeOfCross;
     private Decisions decisions;
+    private FieldThirds fieldThirds;
+    private FieldCorridors fieldCorridors;
+    private String timeStat;
+    private ActionOutcome actionOutcome;
 }

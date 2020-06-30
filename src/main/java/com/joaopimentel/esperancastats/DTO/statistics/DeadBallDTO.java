@@ -1,9 +1,6 @@
 package com.joaopimentel.esperancastats.DTO.statistics;
 
-import com.joaopimentel.esperancastats.Entity.enumerators.ActionOutcome;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfBall;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfDeadBall;
-import com.joaopimentel.esperancastats.Entity.statistics.StatCommonClass;
+import com.joaopimentel.esperancastats.Entity.enumerators.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,8 +8,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class DeadBallDTO extends StatCommonClass {
+public class DeadBallDTO {
     private TypeOfDeadBall typeOfDeadBall;
     private TypeOfBall typeOfBall;
     private ActionOutcome actionOutcome;
+    private FieldThirds fieldThirds;
+    private FieldCorridors fieldCorridors;
+    private String timeStat;
 }

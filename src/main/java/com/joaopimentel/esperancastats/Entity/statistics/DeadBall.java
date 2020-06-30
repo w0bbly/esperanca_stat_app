@@ -1,8 +1,6 @@
 package com.joaopimentel.esperancastats.Entity.statistics;
 
-import com.joaopimentel.esperancastats.Entity.enumerators.ActionOutcome;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfBall;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfDeadBall;
+import com.joaopimentel.esperancastats.Entity.enumerators.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "dead_ball")
-public class DeadBall extends StatCommonClass {
+public class DeadBall {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -27,4 +25,9 @@ public class DeadBall extends StatCommonClass {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "statistic_id", nullable = false)
     private Statistic statistic;
+    @Enumerated(value = EnumType.STRING)
+    private FieldThirds fieldThirds;
+    @Enumerated(value = EnumType.STRING)
+    private FieldCorridors fieldCorridors;
+    private String timeStat;
 }

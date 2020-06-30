@@ -9,15 +9,15 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class StatisticsDTO {
+public class StatisticDTO {
     private List<CrossDTO> crosses;
     private BallPossessionDTO ballPossession;
     private List<DeadBallDTO> deadBalls;
     private List<GoalDTO> goals;
     private List<OffsideDTO> offsides;
-    private List<PassesDTO> passes;
+    private List<PassDTO> passes;
     private List<PossessionLostDTO> possessionLosses;
     private List<PossessionRecoveryDTO> possessionRecoveries;
-    private List<ShotsDTO> shots;
+    private List<ShotDTO> shots;
     private List<TransitionDTO> transitions;
 }

@@ -59,9 +59,13 @@ public class Statistic {
     @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 
-    public void addCross(Cross cross) {
-        this.crosses.add(cross);
-    }
+    public void addCross(Cross cross) { this.crosses.add(cross); }
     public void addGoal(Goal goal) { this.goals.add(goal); }
     public void addDeadBall(DeadBall deadBall) { this.deadBalls.add(deadBall); }
+    public void addOffside(Offside offside) { this.offsides.add(offside); }
+    public void addPass(Pass pass) { this.passes.add(pass); }
+    public void addPossessionLost(PossessionLost possessionLost) { this.possessionLosses.add(possessionLost); }
+    public void addPossessionRecovery(PossessionRecovery possessionRecovery) { this.possessionRecoveries.add(possessionRecovery); }
+    public void addShot(Shot shot) { this.shots.add(shot); }
+    public void addTransition(Transition transition) { this.transitions.add(transition); }
 }
