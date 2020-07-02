@@ -5,7 +5,7 @@ import com.joaopimentel.esperancastats.Entity.statistics.Cross;
 import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import com.joaopimentel.esperancastats.Repository.statistics.CrossMapping;
 import com.joaopimentel.esperancastats.Repository.statistics.CrossRepository;
-import com.joaopimentel.esperancastats.Repository.statistics.StatisticsRepository;
+import com.joaopimentel.esperancastats.Repository.statistics.StatisticRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +16,13 @@ public class CrossService {
 
     private final CrossRepository crossRepository;
     private final CrossMapping crossMapping;
-    private final StatisticsRepository statisticsRepository;
+    private final StatisticRepository statisticRepository;
 
 
-    public CrossService(CrossRepository crossRepository, CrossMapping crossMapping, StatisticsRepository statisticsRepository) {
+    public CrossService(CrossRepository crossRepository, CrossMapping crossMapping, StatisticRepository statisticRepository) {
         this.crossRepository = crossRepository;
         this.crossMapping = crossMapping;
-        this.statisticsRepository = statisticsRepository;
+        this.statisticRepository = statisticRepository;
     }
 
     public CrossDTO getCrossById(Long id) {
@@ -35,7 +35,7 @@ public class CrossService {
     }
 
     public CrossDTO createCross(Long statisticId, CrossDTO dto) {
-        Optional<Statistic> statistic = statisticsRepository.findById(statisticId);
+        Optional<Statistic> statistic = statisticRepository.findById(statisticId);
 
         if(statistic.isPresent()) {
             Cross cross = new Cross();
@@ -48,7 +48,7 @@ public class CrossService {
 
             statistic.get().addCross(cross);
 
-            statisticsRepository.save(statistic.get());
+            statisticRepository.save(statistic.get());
             return dto;
         }
 

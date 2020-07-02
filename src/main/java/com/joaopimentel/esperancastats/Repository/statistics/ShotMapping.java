@@ -6,5 +6,5 @@ import com.joaopimentel.esperancastats.Entity.statistics.Shot;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ShotsMapping extends EntityMapper<ShotDTO, Shot> {
+public interface ShotMapping extends EntityMapper<ShotDTO, Shot> {
 }

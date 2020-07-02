@@ -5,7 +5,7 @@ import com.joaopimentel.esperancastats.Entity.statistics.Goal;
 import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import com.joaopimentel.esperancastats.Repository.statistics.GoalMapping;
 import com.joaopimentel.esperancastats.Repository.statistics.GoalRepository;
-import com.joaopimentel.esperancastats.Repository.statistics.StatisticsRepository;
+import com.joaopimentel.esperancastats.Repository.statistics.StatisticRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +16,13 @@ public class GoalService {
 
     private final GoalRepository goalRepository;
     private final GoalMapping goalMapping;
-    private final StatisticsRepository statisticsRepository;
+    private final StatisticRepository statisticRepository;
 
 
-    public GoalService(GoalRepository goalRepository, GoalMapping goalMapping, StatisticsRepository statisticsRepository) {
+    public GoalService(GoalRepository goalRepository, GoalMapping goalMapping, StatisticRepository statisticRepository) {
         this.goalRepository = goalRepository;
         this.goalMapping = goalMapping;
-        this.statisticsRepository = statisticsRepository;
+        this.statisticRepository = statisticRepository;
     }
 
     public GoalDTO getGoalById(Long id) {
@@ -35,7 +35,7 @@ public class GoalService {
     }
 
     public GoalDTO createGoal(Long statisticId, GoalDTO dto) {
-        Optional<Statistic> statistic = statisticsRepository.findById(statisticId);
+        Optional<Statistic> statistic = statisticRepository.findById(statisticId);
 
         if(statistic.isPresent()) {
             Goal goal = new Goal();
@@ -48,7 +48,7 @@ public class GoalService {
 
             statistic.get().addGoal(goal);
 
-            statisticsRepository.save(statistic.get());
+            statisticRepository.save(statistic.get());
             goalRepository.save(goal);
             return dto;
         }

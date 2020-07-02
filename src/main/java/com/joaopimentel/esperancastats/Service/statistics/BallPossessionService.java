@@ -5,7 +5,7 @@ import com.joaopimentel.esperancastats.Entity.statistics.BallPossession;
 import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import com.joaopimentel.esperancastats.Repository.statistics.BallPossessionMapping;
 import com.joaopimentel.esperancastats.Repository.statistics.BallPossessionRepository;
-import com.joaopimentel.esperancastats.Repository.statistics.StatisticsRepository;
+import com.joaopimentel.esperancastats.Repository.statistics.StatisticRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +16,13 @@ public class BallPossessionService {
 
     private final BallPossessionRepository ballPossessionRepository;
     private final BallPossessionMapping ballPossessionMapping;
-    private final StatisticsRepository statisticsRepository;
+    private final StatisticRepository statisticRepository;
 
 
-    public BallPossessionService(BallPossessionRepository ballPossessionRepository, BallPossessionMapping ballPossessionMapping, StatisticsRepository statisticsRepository) {
+    public BallPossessionService(BallPossessionRepository ballPossessionRepository, BallPossessionMapping ballPossessionMapping, StatisticRepository statisticRepository) {
         this.ballPossessionRepository = ballPossessionRepository;
         this.ballPossessionMapping = ballPossessionMapping;
-        this.statisticsRepository = statisticsRepository;
+        this.statisticRepository = statisticRepository;
     }
 
     public BallPossessionDTO getBallPossessionById(Long id) {
@@ -35,7 +35,7 @@ public class BallPossessionService {
     }
 
     public BallPossessionDTO createBallPossession(Long statisticId, BallPossessionDTO dto) {
-        Optional<Statistic> statistic = statisticsRepository.findById(statisticId);
+        Optional<Statistic> statistic = statisticRepository.findById(statisticId);
 
         if(statistic.isPresent()) {
             BallPossession ballPossession = new BallPossession();
@@ -45,7 +45,7 @@ public class BallPossessionService {
 
             statistic.get().setBallPossession(ballPossession);
 
-            statisticsRepository.save(statistic.get());
+            statisticRepository.save(statistic.get());
             ballPossessionRepository.save(ballPossession);
             return dto;
         }
