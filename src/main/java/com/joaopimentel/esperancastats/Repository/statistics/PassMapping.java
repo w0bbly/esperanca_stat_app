@@ -6,5 +6,5 @@ import com.joaopimentel.esperancastats.Entity.statistics.Pass;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface PassesMapping extends EntityMapper<PassDTO, Pass> {
+public interface PassMapping extends EntityMapper<PassDTO, Pass> {
 }
