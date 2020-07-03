@@ -8,7 +8,7 @@ import com.joaopimentel.esperancastats.Repository.GameMapping;
 import com.joaopimentel.esperancastats.Repository.GameRepository;
 import com.joaopimentel.esperancastats.Repository.TeamRepository;
 import com.joaopimentel.esperancastats.Repository.statistics.StatisticMapping;
-import com.joaopimentel.esperancastats.Repository.statistics.StatisticsRepository;
+import com.joaopimentel.esperancastats.Repository.statistics.StatisticRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,14 +22,14 @@ public class GameService {
     private final GameMapping gameMapping;
     private final TeamRepository teamRepository;
     private final StatisticMapping statisticMapping;
-    private final StatisticsRepository statisticsRepository;
+    private final StatisticRepository statisticRepository;
 
-    public GameService(GameRepository gameRepository, GameMapping gameMapping, TeamRepository teamRepository, StatisticMapping statisticMapping, StatisticsRepository statisticsRepository) {
+    public GameService(GameRepository gameRepository, GameMapping gameMapping, TeamRepository teamRepository, StatisticMapping statisticMapping, StatisticRepository statisticRepository) {
         this.gameRepository = gameRepository;
         this.gameMapping = gameMapping;
         this.teamRepository = teamRepository;
         this.statisticMapping = statisticMapping;
-        this.statisticsRepository = statisticsRepository;
+        this.statisticRepository = statisticRepository;
     }
 
     public GameDTO getGameById(Long id) {
@@ -57,7 +57,7 @@ public class GameService {
 
             Statistic statistic = new Statistic();
             statistic.setGame(game);
-            statisticsRepository.save(statistic);
+            statisticRepository.save(statistic);
 
             game.setStatistic(statistic);
 

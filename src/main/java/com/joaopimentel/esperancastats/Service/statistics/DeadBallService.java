@@ -5,7 +5,7 @@ import com.joaopimentel.esperancastats.Entity.statistics.DeadBall;
 import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import com.joaopimentel.esperancastats.Repository.statistics.DeadBallMapping;
 import com.joaopimentel.esperancastats.Repository.statistics.DeadBallRepository;
-import com.joaopimentel.esperancastats.Repository.statistics.StatisticsRepository;
+import com.joaopimentel.esperancastats.Repository.statistics.StatisticRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +16,13 @@ public class DeadBallService {
 
     private final DeadBallRepository deadBallRepository;
     private final DeadBallMapping deadBallMapping;
-    private final StatisticsRepository statisticsRepository;
+    private final StatisticRepository statisticRepository;
 
 
-    public DeadBallService(DeadBallRepository deadBallRepository, DeadBallMapping deadBallMapping, StatisticsRepository statisticsRepository) {
+    public DeadBallService(DeadBallRepository deadBallRepository, DeadBallMapping deadBallMapping, StatisticRepository statisticRepository) {
         this.deadBallRepository = deadBallRepository;
         this.deadBallMapping = deadBallMapping;
-        this.statisticsRepository = statisticsRepository;
+        this.statisticRepository = statisticRepository;
     }
 
     public DeadBallDTO getDeadBallById(Long id) {
@@ -35,7 +35,7 @@ public class DeadBallService {
     }
 
     public DeadBallDTO createDeadBall(Long statisticId, DeadBallDTO dto) {
-        Optional<Statistic> statistic = statisticsRepository.findById(statisticId);
+        Optional<Statistic> statistic = statisticRepository.findById(statisticId);
 
         if(statistic.isPresent()) {
             DeadBall deadBall = new DeadBall();
@@ -49,7 +49,7 @@ public class DeadBallService {
 
             statistic.get().addDeadBall(deadBall);
 
-            statisticsRepository.save(statistic.get());
+            statisticRepository.save(statistic.get());
             deadBallRepository.save(deadBall);
             return dto;
         }
