@@ -1,8 +1,6 @@
 package com.joaopimentel.esperancastats.Service.statistics;
 
-import com.joaopimentel.esperancastats.DTO.statistics.GoalDTO;
 import com.joaopimentel.esperancastats.DTO.statistics.OffsideDTO;
-import com.joaopimentel.esperancastats.Entity.statistics.Goal;
 import com.joaopimentel.esperancastats.Entity.statistics.Offside;
 import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import com.joaopimentel.esperancastats.Repository.statistics.*;
@@ -16,10 +14,10 @@ public class OffsideService {
 
     private final OffsideRepository offsideRepository;
     private final OffsideMapping offsideMapping;
-    private final StatisticsRepository statisticsRepository;
+    private final StatisticRepository statisticsRepository;
 
 
-    public OffsideService(OffsideRepository offsideRepository, OffsideMapping offsideMapping, StatisticsRepository statisticsRepository) {
+    public OffsideService(OffsideRepository offsideRepository, OffsideMapping offsideMapping, StatisticRepository statisticsRepository) {
         this.offsideRepository = offsideRepository;
         this.offsideMapping = offsideMapping;
         this.statisticsRepository = statisticsRepository;

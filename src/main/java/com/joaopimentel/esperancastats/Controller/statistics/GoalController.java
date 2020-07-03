@@ -1,6 +1,9 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
+import com.joaopimentel.esperancastats.DTO.statistics.DeadBallDTO;
+import com.joaopimentel.esperancastats.DTO.statistics.GoalDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.Goal;
+import com.joaopimentel.esperancastats.Service.statistics.DeadBallService;
 import com.joaopimentel.esperancastats.Service.statistics.GoalService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,32 +23,48 @@ public class GoalController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<Goal>> getAllGoals() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<GoalDTO>> getAllGoals() {
+        return ResponseEntity.ok(goalService.getAllGoals());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Goal> getGoalById(@PathVariable Long id) {
-        return ResponseEntity.ok(new Goal());
+    public ResponseEntity<GoalDTO> getGoalById(@PathVariable Long id) {
+        GoalDTO goalDTO = goalService.getGoalById(id);
+
+        if(goalDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(goalDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<Goal> createGoal() {
-        return ResponseEntity.ok(new Goal());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<GoalDTO> createGoal(@PathVariable Long statisticId, @RequestBody GoalDTO goal) {
+        return ResponseEntity.ok(goalService.createGoal(statisticId, goal));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Goal> editGoal(@PathVariable Long id) {
-        return ResponseEntity.ok(new Goal());
+    public ResponseEntity<GoalDTO> editGoal(@PathVariable Long id, @RequestBody GoalDTO goal) {
+        GoalDTO goalDTO = goalService.editGoal(id, goal);
+
+        if(goalDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(goalDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteGoalById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = goalService.deleteGoalById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<String> deleteAllGoals() {
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(goalService.deleteAllGoals());
     }
 }

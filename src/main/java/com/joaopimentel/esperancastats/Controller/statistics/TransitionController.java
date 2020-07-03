@@ -1,6 +1,8 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
+import com.joaopimentel.esperancastats.DTO.statistics.TransitionDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.Transition;
+import com.joaopimentel.esperancastats.Service.statistics.TransitionService;
 import com.joaopimentel.esperancastats.Service.statistics.TransitionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,32 +22,48 @@ public class TransitionController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<Transition>> getAllTransitions() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<TransitionDTO>> getAllTransitions() {
+        return ResponseEntity.ok(transitionService.getAllTransitions());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Transition> getTransitionById(@PathVariable Long id) {
-        return ResponseEntity.ok(new Transition());
+    public ResponseEntity<TransitionDTO> getTransitionById(@PathVariable Long id) {
+        TransitionDTO transitionDTO = transitionService.getTransitionById(id);
+
+        if(transitionDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(transitionDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<Transition> createTransition() {
-        return ResponseEntity.ok(new Transition());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<TransitionDTO> createTransition(@PathVariable Long statisticId, @RequestBody TransitionDTO transition) {
+        return ResponseEntity.ok(transitionService.createTransition(statisticId, transition));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Transition> editTransition(@PathVariable Long id) {
-        return ResponseEntity.ok(new Transition());
+    public ResponseEntity<TransitionDTO> editTransition(@PathVariable Long id, @RequestBody TransitionDTO transition) {
+        TransitionDTO transitionDTO = transitionService.editTransition(id, transition);
+
+        if(transitionDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(transitionDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteTransitionById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = transitionService.deleteTransitionById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<String> deleteAllTransitions() {
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(transitionService.deleteAllTransitions());
     }
 }

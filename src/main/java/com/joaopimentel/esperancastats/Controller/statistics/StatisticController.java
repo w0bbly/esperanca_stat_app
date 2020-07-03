@@ -1,6 +1,8 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
+import com.joaopimentel.esperancastats.DTO.statistics.StatisticDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
+import com.joaopimentel.esperancastats.Service.statistics.StatisticService;
 import com.joaopimentel.esperancastats.Service.statistics.StatisticService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,32 +22,33 @@ public class StatisticController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<Statistic>> getAllStatistics() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<StatisticDTO>> getAllStatistics() {
+        return ResponseEntity.ok(statisticService.getAllStatistics());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Statistic> getStatisticById(@PathVariable Long id) {
-        return ResponseEntity.ok(new Statistic());
-    }
+    public ResponseEntity<StatisticDTO> getStatisticById(@PathVariable Long id) {
+        StatisticDTO statisticDTO = statisticService.getStatisticById(id);
 
-    @PostMapping
-    public ResponseEntity<Statistic> createStatistic() {
-        return ResponseEntity.ok(new Statistic());
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Statistic> editStatistic(@PathVariable Long id) {
-        return ResponseEntity.ok(new Statistic());
+        if(statisticDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(statisticDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteStatisticById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = statisticService.deleteStatisticById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<String> deleteAllStatistics() {
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(statisticService.deleteAllStatistics());
     }
 }

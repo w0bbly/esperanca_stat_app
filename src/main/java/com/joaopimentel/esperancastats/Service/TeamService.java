@@ -26,7 +26,7 @@ public class TeamService {
     public TeamDTO getTeamById(Long id) {
         Optional<Team> team = teamRepository.findById(id);
 
-        return team.map(teamMapping::toDto).orElse(null);
+        return team.map(teamMapping::toDto).orElse( null);
     }
 
     public List<TeamDTO> getAllTeams() {

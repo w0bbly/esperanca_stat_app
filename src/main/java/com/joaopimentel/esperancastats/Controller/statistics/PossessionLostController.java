@@ -1,5 +1,6 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
+import com.joaopimentel.esperancastats.DTO.statistics.PossessionLostDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.PossessionLost;
 import com.joaopimentel.esperancastats.Service.statistics.PossessionLostService;
 import org.springframework.http.ResponseEntity;
@@ -20,32 +21,48 @@ public class PossessionLostController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<PossessionLost>> getAllPossessionsLost() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<PossessionLostDTO>> getAllPossessionLosses() {
+        return ResponseEntity.ok(possessionLostService.getAllPossessionLosses());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<PossessionLost> getPossessionLostById(@PathVariable Long id) {
-        return ResponseEntity.ok(new PossessionLost());
+    public ResponseEntity<PossessionLostDTO> getPossessionLostById(@PathVariable Long id) {
+        PossessionLostDTO possessionLostDTO = possessionLostService.getPossessionLostById(id);
+
+        if(possessionLostDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(possessionLostDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<PossessionLost> createPossessionLost() {
-        return ResponseEntity.ok(new PossessionLost());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<PossessionLostDTO> createPossessionLost(@PathVariable Long statisticId, @RequestBody PossessionLostDTO possessionLost) {
+        return ResponseEntity.ok(possessionLostService.createPossessionLost(statisticId, possessionLost));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PossessionLost> editPossessionLost(@PathVariable Long id) {
-        return ResponseEntity.ok(new PossessionLost());
+    public ResponseEntity<PossessionLostDTO> editPossessionLost(@PathVariable Long id, @RequestBody PossessionLostDTO possessionLost) {
+        PossessionLostDTO possessionLostDTO = possessionLostService.editPossessionLost(id, possessionLost);
+
+        if(possessionLostDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(possessionLostDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deletePossessionLostById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = possessionLostService.deletePossessionLostById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
-    public ResponseEntity<String> deleteAllPossessionsLost() {
-        return ResponseEntity.ok("");
+    public ResponseEntity<String> deleteAllPossessionLosses() {
+        return ResponseEntity.ok(possessionLostService.deleteAllPossessionLosses());
     }
 }

@@ -1,8 +1,6 @@
 package com.joaopimentel.esperancastats.Service.statistics;
 
-import com.joaopimentel.esperancastats.DTO.statistics.PassDTO;
 import com.joaopimentel.esperancastats.DTO.statistics.PossessionLostDTO;
-import com.joaopimentel.esperancastats.Entity.statistics.Pass;
 import com.joaopimentel.esperancastats.Entity.statistics.PossessionLost;
 import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import com.joaopimentel.esperancastats.Repository.statistics.*;
@@ -16,10 +14,10 @@ public class PossessionLostService {
 
     private final PossessionLostRepository possessionLostRepository;
     private final PossessionLostMapping possessionLostMapping;
-    private final StatisticsRepository statisticsRepository;
+    private final StatisticRepository statisticsRepository;
 
 
-    public PossessionLostService(PossessionLostRepository possessionLostRepository, PossessionLostMapping possessionLostMapping, StatisticsRepository statisticsRepository) {
+    public PossessionLostService(PossessionLostRepository possessionLostRepository, PossessionLostMapping possessionLostMapping, StatisticRepository statisticsRepository) {
         this.possessionLostRepository = possessionLostRepository;
         this.possessionLostMapping = possessionLostMapping;
         this.statisticsRepository = statisticsRepository;

@@ -1,6 +1,9 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
+import com.joaopimentel.esperancastats.DTO.statistics.PossessionLostDTO;
+import com.joaopimentel.esperancastats.DTO.statistics.PossessionRecoveryDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.PossessionRecovery;
+import com.joaopimentel.esperancastats.Service.statistics.PossessionLostService;
 import com.joaopimentel.esperancastats.Service.statistics.PossessionRecoveryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,32 +23,48 @@ public class PossessionRecoveryController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<PossessionRecovery>> getAllPossessionsRecovery() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<PossessionRecoveryDTO>> getAllPossessionLosses() {
+        return ResponseEntity.ok(possessionRecoveryService.getAllPossessionRecoveries());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<PossessionRecovery> getPossessionRecoveryById(@PathVariable Long id) {
-        return ResponseEntity.ok(new PossessionRecovery());
+    public ResponseEntity<PossessionRecoveryDTO> getPossessionRecoveryById(@PathVariable Long id) {
+        PossessionRecoveryDTO possessionRecoveryDTO = possessionRecoveryService.getPossessionRecoveryById(id);
+
+        if(possessionRecoveryDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(possessionRecoveryDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<PossessionRecovery> createPossessionRecovery() {
-        return ResponseEntity.ok(new PossessionRecovery());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<PossessionRecoveryDTO> createPossessionRecovery(@PathVariable Long statisticId, @RequestBody PossessionRecoveryDTO possessionRecovery) {
+        return ResponseEntity.ok(possessionRecoveryService.createPossessionRecovery(statisticId, possessionRecovery));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PossessionRecovery> editPossessionRecovery(@PathVariable Long id) {
-        return ResponseEntity.ok(new PossessionRecovery());
+    public ResponseEntity<PossessionRecoveryDTO> editPossessionRecovery(@PathVariable Long id, @RequestBody PossessionRecoveryDTO possessionRecovery) {
+        PossessionRecoveryDTO possessionRecoveryDTO = possessionRecoveryService.editPossessionRecovery(id, possessionRecovery);
+
+        if(possessionRecoveryDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(possessionRecoveryDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deletePossessionRecoveryById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = possessionRecoveryService.deletePossessionRecoveryById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
-    public ResponseEntity<String> deleteAllPossessionsRecovery() {
-        return ResponseEntity.ok("");
+    public ResponseEntity<String> deleteAllPossessionLosses() {
+        return ResponseEntity.ok(possessionRecoveryService.deleteAllPossessionRecoveries());
     }
 }

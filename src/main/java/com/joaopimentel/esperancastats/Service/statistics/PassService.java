@@ -1,7 +1,6 @@
 package com.joaopimentel.esperancastats.Service.statistics;
 
 import com.joaopimentel.esperancastats.DTO.statistics.PassDTO;
-import com.joaopimentel.esperancastats.DTO.statistics.PassDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.Pass;
 import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import com.joaopimentel.esperancastats.Repository.statistics.*;
@@ -15,10 +14,10 @@ public class PassService {
 
     private final PassRepository passRepository;
     private final PassMapping passMapping;
-    private final StatisticsRepository statisticsRepository;
+    private final StatisticRepository statisticsRepository;
 
 
-    public PassService(PassRepository passRepository, PassMapping passMapping, StatisticsRepository statisticsRepository) {
+    public PassService(PassRepository passRepository, PassMapping passMapping, StatisticRepository statisticsRepository) {
         this.passRepository = passRepository;
         this.passMapping = passMapping;
         this.statisticsRepository = statisticsRepository;

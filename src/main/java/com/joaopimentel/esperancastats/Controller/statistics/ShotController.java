@@ -1,6 +1,8 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
+import com.joaopimentel.esperancastats.DTO.statistics.ShotDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.Shot;
+import com.joaopimentel.esperancastats.Service.statistics.ShotService;
 import com.joaopimentel.esperancastats.Service.statistics.ShotService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,32 +22,48 @@ public class ShotController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<Shot>> getAllShots() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<ShotDTO>> getAllShots() {
+        return ResponseEntity.ok(shotService.getAllShots());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Shot> getShotById(@PathVariable Long id) {
-        return ResponseEntity.ok(new Shot());
+    public ResponseEntity<ShotDTO> getShotById(@PathVariable Long id) {
+        ShotDTO shotDTO = shotService.getShotById(id);
+
+        if(shotDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(shotDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<Shot> createShot() {
-        return ResponseEntity.ok(new Shot());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<ShotDTO> createShot(@PathVariable Long statisticId, @RequestBody ShotDTO shot) {
+        return ResponseEntity.ok(shotService.createShot(statisticId, shot));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Shot> editShot(@PathVariable Long id) {
-        return ResponseEntity.ok(new Shot());
+    public ResponseEntity<ShotDTO> editShot(@PathVariable Long id, @RequestBody ShotDTO shot) {
+        ShotDTO shotDTO = shotService.editShot(id, shot);
+
+        if(shotDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(shotDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteShotById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = shotService.deleteShotById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<String> deleteAllShots() {
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(shotService.deleteAllShots());
     }
 }

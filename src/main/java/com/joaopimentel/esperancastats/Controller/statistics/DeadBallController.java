@@ -1,5 +1,6 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
+import com.joaopimentel.esperancastats.DTO.statistics.DeadBallDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.DeadBall;
 import com.joaopimentel.esperancastats.Service.statistics.DeadBallService;
 import org.springframework.http.ResponseEntity;
@@ -20,32 +21,48 @@ public class DeadBallController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<DeadBall>> getAllDeadBalls() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<DeadBallDTO>> getAllDeadBalls() {
+        return ResponseEntity.ok(deadBallService.getAllDeadBalls());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<DeadBall> getDeadBallById(@PathVariable Long id) {
-        return ResponseEntity.ok(new DeadBall());
+    public ResponseEntity<DeadBallDTO> getDeadBallById(@PathVariable Long id) {
+        DeadBallDTO deadBallDTO = deadBallService.getDeadBallById(id);
+
+        if(deadBallDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(deadBallDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<DeadBall> createDeadBall() {
-        return ResponseEntity.ok(new DeadBall());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<DeadBallDTO> createDeadBall(@PathVariable Long statisticId, @RequestBody DeadBallDTO deadBall) {
+        return ResponseEntity.ok(deadBallService.createDeadBall(statisticId, deadBall));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DeadBall> editDeadBall(@PathVariable Long id) {
-        return ResponseEntity.ok(new DeadBall());
+    public ResponseEntity<DeadBallDTO> editDeadBall(@PathVariable Long id, @RequestBody DeadBallDTO deadBall) {
+        DeadBallDTO deadBallDTO = deadBallService.editDeadBall(id, deadBall);
+
+        if(deadBallDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(deadBallDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteDeadBallById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = deadBallService.deleteDeadBallById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<String> deleteAllDeadBalls() {
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(deadBallService.deleteAllDeadBalls());
     }
 }

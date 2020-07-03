@@ -1,6 +1,8 @@
 package com.joaopimentel.esperancastats.Controller.statistics;
 
+import com.joaopimentel.esperancastats.DTO.statistics.OffsideDTO;
 import com.joaopimentel.esperancastats.Entity.statistics.Offside;
+import com.joaopimentel.esperancastats.Service.statistics.OffsideService;
 import com.joaopimentel.esperancastats.Service.statistics.OffsideService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,32 +22,48 @@ public class OffsideController {
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<List<Offside>> getAllOffsides() {
-        return ResponseEntity.ok(new ArrayList<>());
+    public ResponseEntity<List<OffsideDTO>> getAllOffsides() {
+        return ResponseEntity.ok(offsideService.getAllOffsides());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Offside> getOffsideById(@PathVariable Long id) {
-        return ResponseEntity.ok(new Offside());
+    public ResponseEntity<OffsideDTO> getOffsideById(@PathVariable Long id) {
+        OffsideDTO offsideDTO = offsideService.getOffsideById(id);
+
+        if(offsideDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(offsideDTO);
     }
 
-    @PostMapping
-    public ResponseEntity<Offside> createOffside() {
-        return ResponseEntity.ok(new Offside());
+    @PostMapping(path = "/{statisticId}")
+    public ResponseEntity<OffsideDTO> createOffside(@PathVariable Long statisticId, @RequestBody OffsideDTO offside) {
+        return ResponseEntity.ok(offsideService.createOffside(statisticId, offside));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Offside> editOffside(@PathVariable Long id) {
-        return ResponseEntity.ok(new Offside());
+    public ResponseEntity<OffsideDTO> editOffside(@PathVariable Long id, @RequestBody OffsideDTO offside) {
+        OffsideDTO offsideDTO = offsideService.editOffside(id, offside);
+
+        if(offsideDTO == null)
+            return ResponseEntity.status(404).body(null);
+        else
+            return ResponseEntity.ok(offsideDTO);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteOffsideById(@PathVariable Long id) {
-        return ResponseEntity.ok("");
+        String outcome = offsideService.deleteOffsideById(id);
+
+        if(outcome == null) {
+            return ResponseEntity.status(404).body(null);
+        } else {
+            return ResponseEntity.ok(outcome);
+        }
     }
 
     @DeleteMapping(path = "/all")
     public ResponseEntity<String> deleteAllOffsides() {
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(offsideService.deleteAllOffsides());
     }
 }
