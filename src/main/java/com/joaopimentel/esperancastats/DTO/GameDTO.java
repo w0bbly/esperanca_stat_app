@@ -16,4 +16,5 @@ public class GameDTO {
     private Result result;
     private TypeOfGame typeOfGame;
     private StatisticDTO statistic;
+    private int matchDay;
 }

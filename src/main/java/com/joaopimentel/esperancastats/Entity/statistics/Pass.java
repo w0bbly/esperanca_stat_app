@@ -1,9 +1,6 @@
 package com.joaopimentel.esperancastats.Entity.statistics;
 
-import com.joaopimentel.esperancastats.Entity.enumerators.ActionOutcome;
-import com.joaopimentel.esperancastats.Entity.enumerators.FieldCorridors;
-import com.joaopimentel.esperancastats.Entity.enumerators.FieldThirds;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfPass;
+import com.joaopimentel.esperancastats.Entity.enumerators.*;
 import lombok.*;
 
 import javax.persistence.*;

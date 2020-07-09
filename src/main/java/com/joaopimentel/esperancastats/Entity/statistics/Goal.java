@@ -1,9 +1,6 @@
 package com.joaopimentel.esperancastats.Entity.statistics;
 
-import com.joaopimentel.esperancastats.Entity.enumerators.FieldCorridors;
-import com.joaopimentel.esperancastats.Entity.enumerators.FieldThirds;
-import com.joaopimentel.esperancastats.Entity.enumerators.StateOfGame;
-import com.joaopimentel.esperancastats.Entity.enumerators.TypeOfGoal;
+import com.joaopimentel.esperancastats.Entity.enumerators.*;
 import lombok.*;
 
 import javax.persistence.*;
