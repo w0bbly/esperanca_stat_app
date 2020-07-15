@@ -6,6 +6,7 @@ import com.joaopimentel.esperancastats.Entity.statistics.Statistic;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,8 +27,7 @@ public class Game {
     private TypeOfGame typeOfGame;
     @OneToOne(cascade = CascadeType.ALL)
     private Statistic statistic;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id", nullable = false)
-    private Team team;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "games")
+    private List<Team> teams;
     private int matchDay;
 }

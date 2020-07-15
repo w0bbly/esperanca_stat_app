@@ -33,9 +33,9 @@ public class GameController {
             return ResponseEntity.ok(gameDTO);
     }
 
-    @PostMapping(path = "/{teamId}")
-    public ResponseEntity<GameDTO> createGame(@PathVariable Long teamId, @RequestBody GameDTO game) {
-        return ResponseEntity.ok(gameService.createGame(teamId, game));
+    @PostMapping(path = "/{homeTeamId}/{awayTeamId}")
+    public ResponseEntity<GameDTO> createGame(@PathVariable Long homeTeamId, @PathVariable Long awayTeamId, @RequestBody GameDTO game) {
+        return ResponseEntity.ok(gameService.createGame(homeTeamId, awayTeamId, game));
     }
 
     @PutMapping("/{id}")

@@ -42,13 +42,18 @@ public class GameService {
         return gameMapping.toDto(gameRepository.findAll());
     }
 
-    public GameDTO createGame(Long teamId, GameDTO gameDTO) {
-        Optional<Team> team = teamRepository.findById(teamId);
+    public GameDTO createGame(Long teamIdOne, Long teamIdTwo, GameDTO gameDTO) {
+        Optional<Team> teamOne = teamRepository.findById(teamIdOne);
+        Optional<Team> teamTwo = teamRepository.findById(teamIdTwo);
 
-        if(team.isPresent()) {
+        if(teamOne.isPresent() && teamTwo.isPresent()) {
+            List<Team> teams = new ArrayList<>();
+            teams.add(teamOne.get());
+            teams.add(teamTwo.get());
+
             Game game = new Game();
             game.setTypeOfGame(gameDTO.getTypeOfGame());
-            game.setTeam(team.get());
+            game.setTeams(teams);
             game.setResult(gameDTO.getResult());
             game.setHomeGoals(gameDTO.getHomeGoals());
             game.setAwayGoals(gameDTO.getAwayGoals());
@@ -63,9 +68,11 @@ public class GameService {
 
             List<Game> games = new ArrayList<>();
             games.add(game);
-            team.get().setGames(games);
+            teamOne.get().setGames(games);
+            teamTwo.get().setGames(games);
 
-            teamRepository.save(team.get());
+            teamRepository.save(teamOne.get());
+            teamRepository.save(teamTwo.get());
             gameRepository.save(game);
 
             return gameDTO;

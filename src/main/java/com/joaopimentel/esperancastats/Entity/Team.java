@@ -17,8 +17,9 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String teamName;
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "team")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "team_games",
+                joinColumns = @JoinColumn(name = "game_id"),
+                inverseJoinColumns = @JoinColumn(name = "team_id"))
     private List<Game> games;
 }
